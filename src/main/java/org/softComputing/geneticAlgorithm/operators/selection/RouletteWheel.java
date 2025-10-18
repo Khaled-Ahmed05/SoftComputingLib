@@ -1,7 +1,5 @@
 package org.softComputing.geneticAlgorithm.operators.selection;
 
-import org.softComputing.geneticAlgorithm.fitnessEvaluation.IFitnessEvaluation;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

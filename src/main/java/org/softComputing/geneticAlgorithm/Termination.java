@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Termination<T> {
 
-    private final List<Character> target;
     private final int maxGenerations;
 
     public Termination(List<Character> target, int maxGenerations) {
@@ -13,7 +12,6 @@ public class Termination<T> {
             throw new IllegalArgumentException("Target string cannot be null or empty.");
         if (maxGenerations <= 0)
             throw new IllegalArgumentException("Maximum generations must be positive.");
-        this.target = target;
         this.maxGenerations = maxGenerations;
     }
 

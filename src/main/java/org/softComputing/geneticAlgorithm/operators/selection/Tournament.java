@@ -1,7 +1,5 @@
 package org.softComputing.geneticAlgorithm.operators.selection;
 
-import org.softComputing.geneticAlgorithm.fitnessEvaluation.IFitnessEvaluation;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -28,7 +26,7 @@ public class Tournament<T> implements ISelection<T> {
                 tournamentIndices.add(random.nextInt(candidates.size()));
             }
 
-            int bestIndex = tournamentIndices.get(0);
+            int bestIndex = tournamentIndices.getFirst();
             double bestFitness = candidateFitness.get(bestIndex);
 
             // find the best (highest fitness) individual

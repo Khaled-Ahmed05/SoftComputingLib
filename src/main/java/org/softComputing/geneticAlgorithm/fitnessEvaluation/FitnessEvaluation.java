@@ -1,6 +1,5 @@
 package org.softComputing.geneticAlgorithm.fitnessEvaluation;
 
-import org.softComputing.geneticAlgorithm.fitnessEvaluation.IFitnessEvaluation;
 import java.util.List;
 
 public class FitnessEvaluation implements IFitnessEvaluation<List<Character>> {
