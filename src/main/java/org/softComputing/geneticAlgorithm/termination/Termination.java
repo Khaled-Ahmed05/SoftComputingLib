@@ -1,13 +1,13 @@
-package org.softComputing.geneticAlgorithm;
+package org.softComputing.geneticAlgorithm.termination;
 
 import java.util.Collections;
 import java.util.List;
 
-public class Termination<T> {
+public class Termination<T> implements ITermination<T>{
 
     private final int maxGenerations;
 
-    public Termination(List<Character> target, int maxGenerations) {
+    public Termination(List<T> target, int maxGenerations) {
         if (target == null || target.isEmpty())
             throw new IllegalArgumentException("Target string cannot be null or empty.");
         if (maxGenerations <= 0)
@@ -15,6 +15,7 @@ public class Termination<T> {
         this.maxGenerations = maxGenerations;
     }
 
+    @Override
     public boolean shouldTerminate(List<T> population, List<Double> fitnessValues, int currentGeneration) {
         if (population == null || population.isEmpty() || fitnessValues == null || fitnessValues.isEmpty())
             throw new IllegalArgumentException("Population and fitness values cannot be null or empty.");

@@ -18,7 +18,7 @@ public class Multipoint<T> extends AbstractICrossover<T> {
         int maxPoints = Math.min(3, length - 1); // optional: limit to 3 points
         int numPoints = 1 + random.nextInt(maxPoints);
 
-        // Pick distinct crossover points in (1 .. length-1)
+        // Pick distinct crossover points in (1 to length-1)
         Set<Integer> points = new TreeSet<>();
         while (points.size() < numPoints) {
             int p = 1 + random.nextInt(length - 1);

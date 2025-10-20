@@ -1,7 +1,8 @@
 package org.softComputing;
 
 import org.softComputing.geneticAlgorithm.GeneticAlgorithm;
-import org.softComputing.geneticAlgorithm.Termination;
+import org.softComputing.geneticAlgorithm.termination.ITermination;
+import org.softComputing.geneticAlgorithm.termination.Termination;
 import org.softComputing.geneticAlgorithm.operators.crossover.UniformCO;
 import org.softComputing.geneticAlgorithm.operators.selection.*;
 import org.softComputing.geneticAlgorithm.operators.crossover.*;
@@ -17,27 +18,36 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         // ------------------ Problem setup ------------------
-        List<Character> target = new ArrayList<>(Arrays.asList('H', 'E', 'L', 'L', 'O', ' ', 'W', 'O', 'R', 'L', 'D'));
+        System.out.print("Enter your Password (Separate floats with spaces, e.g., Khaled12 3.3 !): ");
+        String targetInput = scanner.nextLine();
+
+        List<Object> target = parseInput(targetInput);
 
         int populationSize = 200;
         int maxGenerations = 500;
-        int numOfParents = 4;
+        int numOfParents = 8;
         double crossoverRate = 0.7;
-        double mutationRate = 0.15;
-        int tournamentSize = 5;
+        double mutationRate = 0.05;
+        int tournamentSize = 2;
         double swapProbability = 0.5;
         int nPoints = 2;
         double lowerBound = 32;
         double upperBound = 122;
         int eliteCount = 2;
         int numOfReplacedGenes = 5;
-        List<Character> alphabet = new ArrayList<>(Arrays.asList(
+
+        List<Object> alphabet = new ArrayList<>(Arrays.asList(
                 'A','B','C','D','E','F','G','H','I','J','K','L','M',
                 'N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
                 'a','b','c','d','e','f','g','h','i','j','k','l','m',
                 'n','o','p','q','r','s','t','u','v','w','x','y','z',
-                ' '
+                1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '!', '-', '@', '?', '_'
         ));
+                for (int i = 0; i < 10; i++) {
+            double value = i + Math.random();
+            value = Math.round(value * 10.0) / 10.0;
+            alphabet.add(value);
+        }
 
         // ------------------ User input ------------------
         populationSize = getInt(scanner, "\nPopulation size", populationSize);
@@ -47,19 +57,19 @@ public class Main {
         mutationRate = getDouble(scanner, "Mutation rate", mutationRate);
 
         // ------------------ GA Operator Setup ------------------
-        IInitialization<List<Character>> initialization =
-                new Initialization(target.size(), alphabet); // random chars of same length
+        IInitialization<Object> initialization =
+                new Initialization<>(target.size(), alphabet);
 
-        IFitnessEvaluation<List<Character>> fitnessEvaluation =
-                new FitnessEvaluation(target); // fitness = match count / length
+        IFitnessEvaluation<List<Object>> fitnessEvaluation =
+                new FitnessEvaluation<>(target);
 
         // ---------- User input for operators ----------
         System.out.println("\nSelect Selection method:");
         System.out.println("1: Tournament");
         System.out.println("2: RouletteWheel");
-        int selectionChoice = getInt(scanner, ">> Choice", 2);
+        int selectionChoice = getInt(scanner, ">> Choice", 1);
 
-        ISelection<List<Character>> selection;
+        ISelection<List<Object>> selection;
         if(selectionChoice == 1) {
             tournamentSize = getInt(scanner, "Tournament size", tournamentSize);
             selection = new Tournament<>(tournamentSize);
@@ -70,9 +80,9 @@ public class Main {
         System.out.println("1: UniformCO");
         System.out.println("2: NPoint");
         System.out.println("3: Multipoint");
-        int crossoverChoice = getInt(scanner, ">> Choice", 3);
+        int crossoverChoice = getInt(scanner, ">> Choice", 1);
 
-        ICrossover<Character> crossover;
+        ICrossover<Object> crossover;
         if(crossoverChoice == 1) {
             swapProbability = getDouble(scanner, "Swap probability", swapProbability);
             crossover = new UniformCO<>(swapProbability);
@@ -88,25 +98,25 @@ public class Main {
         System.out.println("2: Swap");
         System.out.print("3: Inversion");
 //        System.out.println("4: BitFlip");
-        int mutationChoice = getInt(scanner, "\n>> Choice", 2);
+        int mutationChoice = getInt(scanner, "\n>> Choice", 1);
 
-        IMutation<Character> mutation;
+        IMutation<Object> mutation;
         if(mutationChoice == 1) {
             lowerBound = getDouble(scanner, "Lower bound (ASCII)", lowerBound);
             upperBound = getDouble(scanner, "Upper bound (ASCII)", upperBound);
-            mutation = new UniformM(mutationRate, lowerBound, upperBound);
+            mutation = new UniformM<>(mutationRate, lowerBound, upperBound);
         }
         else if (mutationChoice == 2) mutation = new Swap<>(mutationRate);
         else mutation = new Inversion<>(mutationRate);
-//        else mutation = new BitFlip(Multipoint)
+//        else mutation = new BitFlip(mutationRate);
 
         System.out.println("\nSelect Replacement method:");
         System.out.println("1: ElitistReplacement");
         System.out.println("2: SteadyStateReplacement");
         System.out.println("3: GenerationalReplacement");
-        int replacementChoice = getInt(scanner, ">> Choice", 3);
+        int replacementChoice = getInt(scanner, ">> Choice", 2);
 
-        IReplacement<Character> replacement;
+        IReplacement<Object> replacement;
         if(replacementChoice == 1) {
             eliteCount = getInt(scanner, "Elite count", eliteCount);
             replacement = new ElitistReplacement<>(eliteCount);
@@ -117,10 +127,10 @@ public class Main {
         }
         else replacement = new GenerationalReplacement<>();
 
-        Termination<List<Character>> termination = new Termination<>(target, maxGenerations);
+        ITermination<List<Object>> termination = new Termination<>(Collections.singletonList(target), maxGenerations);
 
         // ------------------ GA Configuration ------------------
-        GeneticAlgorithm<Character> ga = new GeneticAlgorithm<>(
+        GeneticAlgorithm<Object> ga = new GeneticAlgorithm<>(
                 populationSize,
                 maxGenerations,
                 numOfParents,
@@ -130,15 +140,12 @@ public class Main {
                 selection,
                 crossover,
                 mutation,
-                lowerBound,
-                upperBound,
                 replacement,
                 termination
         );
 
         // ------------------ Run the GA ------------------
-        System.out.println("\nStarting Genetic Algorithm — Password Guessing");
-        System.out.println("Target: \"" + target + "\"\n");
+        List<Object> bestIndividual = ga.run();
 
         // ------------------ Display config ------------------
         System.out.println("\nConfiguration:");
@@ -154,15 +161,22 @@ public class Main {
         System.out.println("Elite Count: " + eliteCount);
         System.out.println("Num of Replaced Genes: " + numOfReplacedGenes);
 
-        List<Character> bestIndividual = ga.run();
-
         // ------------------ Display result ------------------
         StringBuilder result = new StringBuilder();
-        for (Character c : bestIndividual) result.append(c);
+        result.append('[');
+        for (int i = 0; i < bestIndividual.size(); i++) {
+            Object c = bestIndividual.get(i);
+            result.append(c);
+            if (i < bestIndividual.size() - 1) {
+                result.append(", ");
+            }
+        }
+        result.append(']');
 
         double finalFitness = fitnessEvaluation.evaluate(bestIndividual);
-        System.out.println("\nBest evolved string: " + result);
-        System.out.printf("Final fitness: %.3f%n", finalFitness);
+        System.out.println("\nTarget individual: " + target);
+        System.out.println("Best individual  : " + result);
+        System.out.printf("Final fitness    : %.3f%n", finalFitness);
         System.out.println("Total generations: " + ga.getGeneration());
 
         // ------------------ Display methods used ------------------
@@ -171,6 +185,28 @@ public class Main {
         System.out.print(crossover.getClass().getSimpleName().replace("<>", "") + ", ");
         System.out.print(mutation.getClass().getSimpleName().replace("<>", "") + ", ");
         System.out.println(replacement.getClass().getSimpleName().replace("<>", ""));
+    }
+
+    private static List<Object> parseInput(String targetInput) {
+        List<Object> target = new ArrayList<>();
+
+        String[] tokens = targetInput.split(" ");
+
+        for (String token : tokens) {
+            try {
+                // Try to parse as double first (for floats or ints)
+                double num = Double.parseDouble(token);
+                // round to 1 decimal place (same as alphabet)
+                num = Math.round(num * 10.0) / 10.0;
+                target.add(num);
+            } catch (NumberFormatException e) {
+                // Not a number, so treat as individual characters
+                for (char c : token.toCharArray()) {
+                    target.add(c);
+                }
+            }
+        }
+        return target;
     }
 
     private static int getInt(Scanner scanner, String prompt, int defaultValue) {

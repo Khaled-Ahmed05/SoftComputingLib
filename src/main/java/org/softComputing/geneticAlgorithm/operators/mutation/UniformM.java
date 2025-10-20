@@ -1,57 +1,82 @@
 package org.softComputing.geneticAlgorithm.operators.mutation;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class UniformM extends AbstractIMutation<Character> {
-    private final double lowerBound;
-    private final double upperBound;
+@SuppressWarnings("unchecked")
+public class UniformM<T> extends AbstractIMutation<T> {
+    private final double charLowerBound;
+    private final double charUpperBound;
+    private final Double numericLowerBound;
+    private final Double numericUpperBound;
 
     public UniformM(double mutationRate, double lowerBound, double upperBound) {
         super(mutationRate);
-        this.lowerBound = lowerBound;
-        this.upperBound = upperBound;
+        this.charLowerBound = lowerBound;
+        this.charUpperBound = upperBound;
+        this.numericLowerBound = null;
+        this.numericUpperBound = null;
     }
 
     @Override
-    public List<Character> mutate(List<Character> chromosome) {
+    public List<T> mutate(List<T> chromosome) {
         validateChromosome(chromosome);
 
-        List<Character> mutated = new ArrayList<>(chromosome);
+        List<T> mutated = new ArrayList<>(chromosome);
 
         for (int i = 0; i < mutated.size(); i++) {
-            if (shouldMutate()) {
-                // Map char to numeric value
-                double Xi = mutated.get(i);
+            if (!shouldMutate()) continue;
 
-                double deltaLxi = Xi - lowerBound;
-                double deltaUxi = upperBound - Xi;
+            T gene = mutated.get(i);
+            switch (gene) {
+                case Character Xi -> {
+                    double newXi = uniformLogic(charLowerBound, charUpperBound, Xi);
 
-                double r1 = random.nextDouble();
-                double delta = (r1 <= 0.5) ? deltaLxi : deltaUxi;
-                double r2 = random.nextDouble() * delta;
+                    char newChar = (char) Math.round(newXi);
 
-                double newXi = (r1 <= 0.5) ? (Xi - r2) : (Xi + r2);
-                newXi = Math.max(lowerBound, Math.min(upperBound, newXi)); // clamp
+                    mutated.set(i, (T) Character.valueOf(newChar));
+                }
+                case Number number -> {
+                    double lower = numericLowerBound != null ? numericLowerBound : 0.0;
+                    double upper = numericUpperBound != null ? numericUpperBound : 10.0;
 
-                // Map back to char
-                mutated.set(i, (char) Math.round(newXi));
-            }
-        }
+                    double Xi = number.doubleValue();
+                    double newXi = uniformLogic(lower, upper, Xi);
 
-        // values in boundary that would cause solution infeasibility
-        for (int i = 0; i < mutated.size(); i++) {
-            char gene = mutated.get(i);
+                    newXi = Math.round(newXi * 10.0) / 10.0;
 
-            if ((int) gene > 90 && (int) gene < 97 || (int) gene < 65 && (int) gene > 32) {
-                char newGene;
-                do {
-                    newGene = (char) (lowerBound + (int) (Math.random() * (upperBound - lowerBound + 1)));
-                } while (newGene >= 91 && newGene <= 96);
-
-                mutated.set(i, newGene);
+                    Number boxed = boxNumberForType(gene.getClass(), newXi);
+                    mutated.set(i, (T) boxed);
+                }
+                default -> throw new UnsupportedOperationException(
+                        "UniformM does not support mutation for type: " + gene.getClass());
             }
         }
 
         return mutated;
+    }
+
+    private double uniformLogic(double lower, double upper, double xi) {
+        double deltaLxi = xi - lower;
+        double deltaUxi = upper - xi;
+
+        double r1 = random.nextDouble();
+        double delta = (r1 <= 0.5) ? deltaLxi : deltaUxi;
+        double r2 = random.nextDouble() * Math.abs(delta);
+
+        double newXi = (r1 <= 0.5) ? (xi - r2) : (xi + r2);
+        newXi = Math.max(lower, Math.min(upper, newXi));
+
+        return newXi;
+    }
+
+    private Number boxNumberForType(Class<?> type, double value) {
+        if (type == Integer.class) return (int) Math.round(value);
+        if (type == Long.class) return Math.round(value);
+        if (type == Short.class) return (short) Math.round(value);
+        if (type == Byte.class) return (byte) Math.round(value);
+        if (type == Float.class) return (float) value;
+        if (type == Double.class) return value;
+        throw new UnsupportedOperationException("Numeric type not supported: " + type);
     }
 }
