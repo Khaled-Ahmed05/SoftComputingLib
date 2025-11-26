@@ -1,0 +1,257 @@
+{
+  "rules": [
+    {
+      "id": 0,
+      "type": "sugeno",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Positive"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Fall"
+        }
+      ],
+      "sugenoOutput": 25.0
+    },
+    {
+      "id": 1,
+      "type": "sugeno",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Positive"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Fall"
+        }
+      ],
+      "sugenoOutput": 10.0
+    },
+    {
+      "id": 2,
+      "type": "sugeno",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Positive"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Stable"
+        }
+      ],
+      "sugenoOutput": 25.0
+    },
+    {
+      "id": 3,
+      "type": "sugeno",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Positive"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Fall"
+        }
+      ],
+      "sugenoOutput": 10.0
+    },
+    {
+      "id": 4,
+      "type": "sugeno",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Positive"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Stable"
+        }
+      ],
+      "sugenoOutput": 10.0
+    },
+    {
+      "id": 5,
+      "type": "sugeno",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Positive"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Rise"
+        }
+      ],
+      "sugenoOutput": 0.0
+    },
+    {
+      "id": 6,
+      "type": "sugeno",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Zero"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Stable"
+        }
+      ],
+      "sugenoOutput": 0.0
+    },
+    {
+      "id": 7,
+      "type": "sugeno",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Zero"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Fall"
+        }
+      ],
+      "sugenoOutput": 10.0
+    },
+    {
+      "id": 8,
+      "type": "sugeno",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Zero"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Rise"
+        }
+      ],
+      "sugenoOutput": -10.0
+    },
+    {
+      "id": 9,
+      "type": "sugeno",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Negative"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Rise"
+        }
+      ],
+      "sugenoOutput": -25.0
+    },
+    {
+      "id": 10,
+      "type": "sugeno",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Negative"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Stable"
+        }
+      ],
+      "sugenoOutput": -10.0
+    },
+    {
+      "id": 11,
+      "type": "sugeno",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Negative"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Rise"
+        }
+      ],
+      "sugenoOutput": -25.0
+    },
+    {
+      "id": 12,
+      "type": "sugeno",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Negative"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Rise"
+        }
+      ],
+      "sugenoOutput": -10.0
+    },
+    {
+      "id": 13,
+      "type": "sugeno",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Negative"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Stable"
+        }
+      ],
+      "sugenoOutput": -25.0
+    }
+  ],
+  "nextId": 14
+}

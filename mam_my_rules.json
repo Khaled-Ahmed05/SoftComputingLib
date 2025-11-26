@@ -1,0 +1,299 @@
+{
+  "rules": [
+    {
+      "id": 0,
+      "type": "mamdani",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Positive"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Fall"
+        }
+      ],
+      "consequent": {
+        "variable": "Thrust adjustment",
+        "setName": "Increase"
+      }
+    },
+    {
+      "id": 1,
+      "type": "mamdani",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Positive"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Fall"
+        }
+      ],
+      "consequent": {
+        "variable": "Thrust adjustment",
+        "setName": "Increase"
+      }
+    },
+    {
+      "id": 2,
+      "type": "mamdani",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Positive"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Stable"
+        }
+      ],
+      "consequent": {
+        "variable": "Thrust adjustment",
+        "setName": "Increase"
+      }
+    },
+    {
+      "id": 3,
+      "type": "mamdani",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Positive"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Fall"
+        }
+      ],
+      "consequent": {
+        "variable": "Thrust adjustment",
+        "setName": "Increase"
+      }
+    },
+    {
+      "id": 4,
+      "type": "mamdani",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Positive"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Stable"
+        }
+      ],
+      "consequent": {
+        "variable": "Thrust adjustment",
+        "setName": "Increase"
+      }
+    },
+    {
+      "id": 5,
+      "type": "mamdani",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Positive"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Rise"
+        }
+      ],
+      "consequent": {
+        "variable": "Thrust adjustment",
+        "setName": "No Change"
+      }
+    },
+    {
+      "id": 6,
+      "type": "mamdani",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Zero"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Stable"
+        }
+      ],
+      "consequent": {
+        "variable": "Thrust adjustment",
+        "setName": "No Change"
+      }
+    },
+    {
+      "id": 7,
+      "type": "mamdani",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Zero"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Fall"
+        }
+      ],
+      "consequent": {
+        "variable": "Thrust adjustment",
+        "setName": "Increase"
+      }
+    },
+    {
+      "id": 8,
+      "type": "mamdani",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Zero"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Rise"
+        }
+      ],
+      "consequent": {
+        "variable": "Thrust adjustment",
+        "setName": "Decrease"
+      }
+    },
+    {
+      "id": 9,
+      "type": "mamdani",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Negative"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Rise"
+        }
+      ],
+      "consequent": {
+        "variable": "Thrust adjustment",
+        "setName": "Decrease"
+      }
+    },
+    {
+      "id": 10,
+      "type": "mamdani",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Negative"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Stable"
+        }
+      ],
+      "consequent": {
+        "variable": "Thrust adjustment",
+        "setName": "Decrease"
+      }
+    },
+    {
+      "id": 11,
+      "type": "mamdani",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Negative"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Rise"
+        }
+      ],
+      "consequent": {
+        "variable": "Thrust adjustment",
+        "setName": "Decrease"
+      }
+    },
+    {
+      "id": 12,
+      "type": "mamdani",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Negative"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Rise"
+        }
+      ],
+      "consequent": {
+        "variable": "Thrust adjustment",
+        "setName": "Decrease"
+      }
+    },
+    {
+      "id": 13,
+      "type": "mamdani",
+      "enabled": true,
+      "weight": 1.0,
+      "operator": "Min",
+      "conditions": [
+        {
+          "variable": "Altitude error",
+          "setName": "Negative"
+        },
+        {
+          "variable": "Vertical velocity",
+          "setName": "Stable"
+        }
+      ],
+      "consequent": {
+        "variable": "Thrust adjustment",
+        "setName": "Decrease"
+      }
+    }
+  ],
+  "nextId": 14
+}
