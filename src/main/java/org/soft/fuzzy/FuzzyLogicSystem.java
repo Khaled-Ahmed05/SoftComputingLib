@@ -23,8 +23,6 @@ public class FuzzyLogicSystem {
     private final Mamdani mamdaniEngine;
     private final Sugeno sugenoEngine;
 
-    private Defuzzifier defuzzifier;
-
     public FuzzyLogicSystem() {
         defineDefaultVariables();
 
@@ -33,7 +31,7 @@ public class FuzzyLogicSystem {
         mamdaniEngine = new Mamdani(mamdaniRuleBase, AND, OR);
         sugenoEngine = new Sugeno(sugenoRuleBase, AND);
 
-        defuzzifier = new Centroid();
+        new Centroid();
     }
 
     public void setAndOperator(LogicalOperator AND) {
@@ -45,7 +43,6 @@ public class FuzzyLogicSystem {
     }
 
     public void setDefuzzifier(Defuzzifier defuzzifier) {
-        this.defuzzifier = defuzzifier;
     }
 
     public FuzzyVariable getInputVariable(String name) {

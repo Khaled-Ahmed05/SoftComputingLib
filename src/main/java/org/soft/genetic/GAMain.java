@@ -1,6 +1,5 @@
-package org.soft;
+package org.soft.genetic;
 
-import org.soft.genetic.GeneticAlgorithm;
 import org.soft.genetic.termination.ITermination;
 import org.soft.genetic.termination.Termination;
 import org.soft.genetic.operators.crossover.UniformCO;
@@ -13,7 +12,7 @@ import org.soft.genetic.fitnessEvaluation.*;
 
 import java.util.*;
 
-public class Main {
+public class GAMain {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 

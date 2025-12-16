@@ -200,6 +200,8 @@ public class FuzzyMain {
         System.out.println("Enter Vertical velocity (double): ");
         double VV = sc.nextDouble();
 
+        sc.close();
+
         Map<String, Double> inputs = Map.of(
                 "Altitude error", AE,
                 "Vertical velocity", VV
